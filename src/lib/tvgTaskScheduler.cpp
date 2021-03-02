@@ -158,7 +158,7 @@ public:
 
 }
 
-static TaskSchedulerImpl* inst = nullptr;
+static thread_local TaskSchedulerImpl* inst = nullptr;
 
 /************************************************************************/
 /* External Class Implementation                                        */

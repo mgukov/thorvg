@@ -30,7 +30,7 @@
 /* Internal Class Implementation                                        */
 /************************************************************************/
 
-static int initCnt = 0;
+static thread_local int initCnt = 0;
 
 
 static Loader* _find(FileType type)

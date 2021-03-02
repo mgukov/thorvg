@@ -35,7 +35,7 @@
 /************************************************************************/
 /* Internal Class Implementation                                        */
 /************************************************************************/
-static bool initialized = false;
+static thread_local bool initialized = false;
 
 /************************************************************************/
 /* External Class Implementation                                        */

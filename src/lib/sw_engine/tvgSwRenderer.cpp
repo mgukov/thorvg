@@ -27,8 +27,8 @@
 /************************************************************************/
 /* Internal Class Implementation                                        */
 /************************************************************************/
-static bool initEngine = false;
-static uint32_t rendererCnt = 0;
+static thread_local bool initEngine = false;
+static thread_local uint32_t rendererCnt = 0;
 
 
 struct SwTask : Task

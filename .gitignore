@@ -3,3 +3,5 @@ builddir
 .vscode
 *.swp
 doc
+.idea
+cmake-build-debug

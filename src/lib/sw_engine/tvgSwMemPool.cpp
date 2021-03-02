@@ -26,9 +26,9 @@
 /* Internal Class Implementation                                        */
 /************************************************************************/
 
-static SwOutline* outline = nullptr;
-static SwOutline* strokeOutline = nullptr;
-static unsigned allocSize = 0;
+static thread_local SwOutline* outline = nullptr;
+static thread_local SwOutline* strokeOutline = nullptr;
+static thread_local unsigned allocSize = 0;
 
 
 /************************************************************************/
