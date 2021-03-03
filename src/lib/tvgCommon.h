@@ -22,8 +22,8 @@
 #ifndef _TVG_COMMON_H_
 #define _TVG_COMMON_H_
 
-#include "config.h"
-#include "thorvg.h"
+#include "tvg_config.h"
+#include "tvgcanvas.h"
 
 using namespace std;
 using namespace tvg;

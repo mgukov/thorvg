@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 
-project(thorvg VERSION 0.1)
+project(tvgcanvas VERSION 0.1)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(Utils)
@@ -8,7 +8,6 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 find_package(Threads REQUIRED)
-
 
 include_directories(
         src/loaders/raw
@@ -20,25 +19,24 @@ include_directories(
 )
 
 set_compiled_files("${PROJECT_SOURCE_DIR}/src" INCLUDED_FILES)
-print_compiled_files("thorvg" "${INCLUDED_FILES}")
+print_compiled_files("tvgcanvas" "${INCLUDED_FILES}")
 
-add_library(thorvg ${INCLUDED_FILES})
-
-set_target_properties(thorvg PROPERTIES DEFINE_SYMBOL THORVG_BUILD )
+add_library(tvgcanvas SHARED ${INCLUDED_FILES})
+set_target_properties(tvgcanvas PROPERTIES DEFINE_SYMBOL TVGCANVAS_BUILD)
 
 #declare version of the target
 set(player_version_major 0)
 set(player_version_minor 2)
 set(player_version ${player_version_major}.${player_version_minor})
-set_target_properties(thorvg PROPERTIES
+set_target_properties(tvgcanvas PROPERTIES
         VERSION    ${player_version}
         SOVERSION  ${player_version_major}
         )
 
-add_library(thorvg::thorvg ALIAS thorvg)
+add_library(tvgcanvas::tvgcanvas ALIAS tvgcanvas)
 
 target_link_libraries(
-        thorvg
+        tvgcanvas
         Threads::Threads
 )
 
@@ -49,13 +47,13 @@ INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc DESTINATION ${LIB_I
 
 #install header
 install(FILES
-        inc/config.h
-        inc/thorvg.h
-        inc/thorvg_capi.h
+        inc/tvg_config.h
+        inc/tvgcanvas.h
+        inc/tvgcanvas_capi.h
         DESTINATION include)
 
 #install lib
-install( TARGETS thorvg EXPORT thorvg-targets
+install( TARGETS tvgcanvas EXPORT tvgcanvas-targets
         LIBRARY     DESTINATION    ${LIB_INSTALL_DIR}
         ARCHIVE     DESTINATION    ${LIB_INSTALL_DIR}
         INCLUDES    DESTINATION    include
@@ -63,35 +61,35 @@ install( TARGETS thorvg EXPORT thorvg-targets
 
 #install config file.
 
-install( EXPORT thorvg-targets
-        FILE          thorvgTargets.cmake
-        NAMESPACE     thorvg::
-        DESTINATION   ${LIB_INSTALL_DIR}/cmake/thorvg
+install( EXPORT tvgcanvas-targets
+        FILE          tvgcanvasTargets.cmake
+        NAMESPACE     tvgcanvas::
+        DESTINATION   ${LIB_INSTALL_DIR}/cmake/tvgcanvas
         )
 
 
 #Create a ConfigVersion.cmake file
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-        ${CMAKE_CURRENT_BINARY_DIR}/thorvgConfigVersion.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/tvgcanvasConfigVersion.cmake
         VERSION ${PROJECT_VERSION}
         COMPATIBILITY AnyNewerVersion
 )
 
-configure_package_config_file(${CMAKE_CURRENT_LIST_DIR}/cmake/thorvgConfig.cmake.in
-        ${CMAKE_CURRENT_BINARY_DIR}/thorvgConfig.cmake
-        INSTALL_DESTINATION ${LIB_INSTALL_DIR}/cmake/thorvg
+configure_package_config_file(${CMAKE_CURRENT_LIST_DIR}/cmake/tvgcanvasConfig.cmake.in
+        ${CMAKE_CURRENT_BINARY_DIR}/tvgcanvasConfig.cmake
+        INSTALL_DESTINATION ${LIB_INSTALL_DIR}/cmake/tvgcanvas
         )
 
 #Install the config, configversion and custom find modules
 install(FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/thorvgConfig.cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/thorvgConfigVersion.cmake
-        DESTINATION ${LIB_INSTALL_DIR}/cmake/thorvg
+        ${CMAKE_CURRENT_BINARY_DIR}/tvgcanvasConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/tvgcanvasConfigVersion.cmake
+        DESTINATION ${LIB_INSTALL_DIR}/cmake/tvgcanvas
         )
 
 
-export(EXPORT thorvg-targets FILE ${CMAKE_CURRENT_BINARY_DIR}/thorvgTargets.cmake NAMESPACE thorvg::)
+export(EXPORT tvgcanvas-targets FILE ${CMAKE_CURRENT_BINARY_DIR}/tvgcanvasTargets.cmake NAMESPACE tvgcanvas::)
 
 #Register package in user's package registry
-export(PACKAGE thorvg)
+export(PACKAGE tvgcanvas)

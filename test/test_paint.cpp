@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <thread>
-#include <thorvg.h>
+#include <tvgcanvas.h>
 
 class PaintTest : public ::testing::Test {
 public:

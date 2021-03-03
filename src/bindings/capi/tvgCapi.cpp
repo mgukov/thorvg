@@ -21,8 +21,8 @@
  */
 
 #include <string>
-#include <thorvg.h>
-#include "thorvg_capi.h"
+#include <tvgcanvas.h>
+#include "tvgcanvas_capi.h"
 
 using namespace std;
 using namespace tvg;

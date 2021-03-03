@@ -6,5 +6,5 @@ Name: Thor Vector Graphics
 Description: Thor Vector Graphics Library
 Version: @VERSION@
 Requires:
-Libs: -L@LIBDIR@ -lthorvg
+Libs: -L@LIBDIR@ -ltvgcanvas
 Cflags: -I@INCDIR@
