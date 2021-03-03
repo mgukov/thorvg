@@ -9,19 +9,18 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 find_package(Threads REQUIRED)
 
+option(TVG_GL_SUPPORT "Enable LOTTIE MODULE SUPPORT" OFF)
+
 include_directories(
-        src/loaders/raw
-        src/loaders/svg
-        src/lib/sw_engine
-        src/lib/gl_engine
-        src/lib
+#        src/loaders/raw
+#        src/loaders/svg
+#        src/lib/sw_engine
+#        src/lib/gl_engine
+#        src/lib
         inc
 )
 
-set_compiled_files("${PROJECT_SOURCE_DIR}/src" INCLUDED_FILES)
-print_compiled_files("tvgcanvas" "${INCLUDED_FILES}")
-
-add_library(tvgcanvas SHARED ${INCLUDED_FILES})
+add_library(tvgcanvas SHARED)
 set_target_properties(tvgcanvas PROPERTIES DEFINE_SYMBOL TVGCANVAS_BUILD)
 
 #declare version of the target
@@ -40,6 +39,13 @@ target_link_libraries(
         Threads::Threads
 )
 
+
+add_subdirectory(src)
+
+SET(PREFIX ${CMAKE_INSTALL_PREFIX})
+SET(EXEC_DIR ${PREFIX})
+SET(LIBDIR ${LIB_INSTALL_DIR})
+SET(INCDIR ${PREFIX}/include)
 
 CONFIGURE_FILE(pc/${PROJECT_NAME}.pc.in ${PROJECT_NAME}.pc)
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)
