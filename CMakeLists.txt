@@ -47,7 +47,6 @@ INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc DESTINATION ${LIB_I
 
 #install header
 install(FILES
-        inc/tvg_config.h
         inc/tvgcanvas.h
         inc/tvgcanvas_capi.h
         DESTINATION include)
